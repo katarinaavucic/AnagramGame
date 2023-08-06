@@ -2,14 +2,20 @@ package use_cases;
 
 import entities.AnagramChecker;
 
+import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
 public class AnagramGameUseCase {
     private final AnagramChecker anagramChecker;
+    private final Map<String, Integer> highScores; // Difficulty level to high score mapping
+    private static final String HIGH_SCORES_FILE = "high_scores.txt";
 
     public AnagramGameUseCase(AnagramChecker anagramChecker) {
         this.anagramChecker = anagramChecker;
+        this.highScores = loadHighScores();
     }
 
     public String getDifficulty(Scanner scanner) {
@@ -78,5 +84,47 @@ public class AnagramGameUseCase {
         }
         double timeMultiplier = 1.0 / (elapsedTime / 1000.0); // Higher score for faster solving
         return (int) (baseScore * timeMultiplier);
+    }
+
+    public boolean isHighScore(String difficulty, int score) {
+        return highScores.containsKey(difficulty) && score > highScores.get(difficulty);
+    }
+
+    public void updateHighScore(String difficulty, int score) {
+        if (!highScores.containsKey(difficulty) || score > highScores.get(difficulty)) {
+            highScores.put(difficulty, score);
+        }
+    }
+
+    public int getHighScore(String difficulty) {
+        return highScores.getOrDefault(difficulty, 0);
+    }
+
+    public void saveHighScores() {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(HIGH_SCORES_FILE))) {
+            for (Map.Entry<String, Integer> entry : highScores.entrySet()) {
+                writer.println(entry.getKey() + "," + entry.getValue());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Map<String, Integer> loadHighScores() {
+        Map<String, Integer> loadedHighScores = new HashMap<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(HIGH_SCORES_FILE))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 2) {
+                    String difficulty = parts[0];
+                    int score = Integer.parseInt(parts[1]);
+                    loadedHighScores.put(difficulty, score);
+                }
+            }
+        } catch (IOException e) {
+            // Ignore if the file doesn't exist or there's an issue reading it
+        }
+        return loadedHighScores;
     }
 }

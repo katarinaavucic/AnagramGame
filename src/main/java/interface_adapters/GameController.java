@@ -48,6 +48,14 @@ public class GameController {
 
             System.out.println("Total score: " + totalScore);
 
+            if (gameUseCase.isHighScore(difficulty, roundScore)) {
+                System.out.println("New high score for " + difficulty + ": " + roundScore);
+                gameUseCase.updateHighScore(difficulty, roundScore);
+                gameUseCase.saveHighScores(); // Save updated high scores
+            } else {
+                System.out.println("High score for " + difficulty + ": " + gameUseCase.getHighScore(difficulty));
+            }
+
             System.out.print("Type 'quit' to exit or press Enter to continue: ");
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("quit")) {

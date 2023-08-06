@@ -3,7 +3,6 @@ import use_cases.AnagramGameUseCase;
 import entities.AnagramChecker;
 
 import java.util.Scanner;
-import java.util.Random;
 
 public class Main {
 
