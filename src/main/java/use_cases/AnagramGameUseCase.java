@@ -126,5 +126,9 @@ public class AnagramGameUseCase {
             // Ignore if the file doesn't exist or there's an issue reading it
         }
         return loadedHighScores;
+
+    }
+    public boolean checkAnagrams(String word1, String word2) {
+        return AnagramChecker.areAnagrams(word1, word2);
     }
 }
