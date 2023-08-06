@@ -1,33 +1,42 @@
 package interface_adapters;
 
-import use_cases.AnagramGameUseCase;
+import use_cases.AnagramGameInputBoundary;
+import use_cases.HighScoreManagerInputBoundary;
 
 import java.util.Scanner;
 
 public class GameController {
     private final Scanner scanner;
-    private final AnagramGameUseCase gameUseCase;
+    private final AnagramGameInputBoundary gameUseCase;
+    private final HighScoreManagerInputBoundary highScoreManager;
 
-    public GameController(Scanner scanner, AnagramGameUseCase gameUseCase) {
+    public GameController(Scanner scanner, AnagramGameInputBoundary gameUseCase, HighScoreManagerInputBoundary highScoreManager) {
         this.scanner = scanner;
         this.gameUseCase = gameUseCase;
+        this.highScoreManager = highScoreManager;
     }
+
 
     public void startGame() {
         System.out.println("Welcome to the Anagram Game!");
 
+        label:
         while (true) {
             System.out.println("Select an option:\n1. Play anagram game\n2. Check if two words are anagrams\n3. Quit");
             String option = scanner.nextLine();
 
-            if (option.equals("1")) {
-                playAnagramGame();
-            } else if (option.equals("2")) {
-                checkAnagrams();
-            } else if (option.equals("3")) {
-                break;
-            } else {
-                System.out.println("Invalid option. Please select again.");
+            switch (option) {
+                case "1":
+                    playAnagramGame();
+                    break;
+                case "2":
+                    checkAnagrams();
+                    break;
+                case "3":
+                    break label;
+                default:
+                    System.out.println("Invalid option. Please select again.");
+                    break;
             }
         }
 
@@ -69,12 +78,12 @@ public class GameController {
 
             System.out.println("Total score: " + totalScore);
 
-            if (gameUseCase.isHighScore(difficulty, roundScore)) {
+            if (highScoreManager.isHighScore(difficulty, roundScore)) {
                 System.out.println("New high score for " + difficulty + ": " + roundScore);
-                gameUseCase.updateHighScore(difficulty, roundScore);
-                gameUseCase.saveHighScores();
+                highScoreManager.updateHighScore(difficulty, roundScore);
+                highScoreManager.saveHighScores();
             } else {
-                System.out.println("High score for " + difficulty + ": " + gameUseCase.getHighScore(difficulty));
+                System.out.println("High score for " + difficulty + ": " + highScoreManager.getHighScore(difficulty));
             }
 
             System.out.print("Type 'quit' to exit or press Enter to continue: ");
