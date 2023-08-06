@@ -29,16 +29,13 @@ public class AnagramGameUseCase implements AnagramGameInputBoundary {
         String[] selectedWords;
 
         switch (difficulty) {
-            case "easy":
-                selectedWords = easyWords;
-                break;
             case "medium":
                 selectedWords = mediumWords;
                 break;
             case "hard":
                 selectedWords = hardWords;
                 break;
-            default:
+            default: // default is easy
                 selectedWords = easyWords; // Default to easy words
                 break;
         }
@@ -65,23 +62,19 @@ public class AnagramGameUseCase implements AnagramGameInputBoundary {
 
     @Override
     public int calculateScore(long elapsedTime, String difficulty) {
-        int baseScore;
+        ScoringStrategy scoringStrategy;
         switch (difficulty) {
-            case "easy":
-                baseScore = 100;
-                break;
             case "medium":
-                baseScore = 150;
+                scoringStrategy = new MediumScoringStrategy();
                 break;
             case "hard":
-                baseScore = 200;
+                scoringStrategy = new HardScoringStrategy();
                 break;
-            default:
-                baseScore = 100; // Default to easy level
+            default: // default is easy
+                scoringStrategy = new EasyScoringStrategy();
                 break;
         }
-        double timeMultiplier = 1.0 / (elapsedTime / 1000.0); // Higher score for faster solving
-        return (int) (baseScore * timeMultiplier);
+        return scoringStrategy.calculateScore(elapsedTime);
     }
 
     @Override
