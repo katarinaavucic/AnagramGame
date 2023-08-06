@@ -1,7 +1,11 @@
 import interface_adapters.FileHighScoreGateway;
 import interface_adapters.GameController;
+import use_cases.gameplay.AnagramGameInputBoundary;
+import use_cases.gameplay.AnagramGameUseCase;
+import use_cases.saving.HighScoreGatewayBoundary;
+import use_cases.saving.HighScoreManagerInputBoundary;
+import use_cases.saving.HighScoreManagerUseCase;
 import views.StartGameMenu;
-import use_cases.*;
 import entities.AnagramChecker;
 
 import java.util.Scanner;

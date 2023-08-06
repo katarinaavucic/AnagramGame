@@ -1,4 +1,4 @@
-package use_cases;
+package use_cases.scoring;
 
 public class EasyScoringStrategy implements ScoringStrategy {
     @Override

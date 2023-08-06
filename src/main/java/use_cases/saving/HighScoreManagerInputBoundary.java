@@ -1,4 +1,4 @@
-package use_cases;
+package use_cases.saving;
 
 public interface HighScoreManagerInputBoundary {
     boolean isHighScore(String difficulty, int score);

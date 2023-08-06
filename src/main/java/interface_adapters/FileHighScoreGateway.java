@@ -1,6 +1,6 @@
 package interface_adapters;
 
-import use_cases.HighScoreGatewayBoundary;
+import use_cases.saving.HighScoreGatewayBoundary;
 
 import java.io.*;
 import java.util.HashMap;

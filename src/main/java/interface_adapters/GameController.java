@@ -1,6 +1,6 @@
 package interface_adapters;
 
-import use_cases.AnagramGameInputBoundary;
+import use_cases.gameplay.AnagramGameInputBoundary;
 
 public class GameController {
     private final AnagramGameInputBoundary gameUseCase;

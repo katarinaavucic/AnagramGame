@@ -1,6 +1,11 @@
-package use_cases;
+package use_cases.gameplay;
 
 import entities.AnagramChecker;
+import use_cases.saving.HighScoreManagerInputBoundary;
+import use_cases.scoring.EasyScoringStrategy;
+import use_cases.scoring.HardScoringStrategy;
+import use_cases.scoring.MediumScoringStrategy;
+import use_cases.scoring.ScoringStrategy;
 
 import java.util.Random;
 import java.util.Scanner;

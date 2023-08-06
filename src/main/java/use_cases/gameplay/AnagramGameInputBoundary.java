@@ -1,4 +1,4 @@
-package use_cases;
+package use_cases.gameplay;
 
 public interface AnagramGameInputBoundary {
     void playAnagramGame();
