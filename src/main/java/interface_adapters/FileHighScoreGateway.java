@@ -40,6 +40,5 @@ public class FileHighScoreGateway implements HighScoreGatewayBoundary {
             // Ignore if the file doesn't exist or there's an issue reading it
         }
         return loadedHighScores;
-
     }
 }

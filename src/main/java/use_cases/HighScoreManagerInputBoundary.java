@@ -5,6 +5,4 @@ public interface HighScoreManagerInputBoundary {
     void updateHighScore(String difficulty, int score);
     int getHighScore(String difficulty);
     void saveHighScores();
-
-
 }

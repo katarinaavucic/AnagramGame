@@ -7,19 +7,90 @@ import java.util.Scanner;
 
 public class AnagramGameUseCase implements AnagramGameInputBoundary {
     private final AnagramChecker anagramChecker;
+    private final Scanner scanner;
+    private final HighScoreManagerInputBoundary highScoreManager;
 
-    public AnagramGameUseCase(AnagramChecker anagramChecker) {
+    public AnagramGameUseCase(AnagramChecker anagramChecker, Scanner scanner, HighScoreManagerInputBoundary highScoreManager) {
         this.anagramChecker = anagramChecker;
+        this.scanner = scanner;
+        this.highScoreManager = highScoreManager;
     }
 
     @Override
-    public String getDifficulty(Scanner scanner) {
+    public void playAnagramGame() {
+        System.out.println("Anagram Game:");
+        int totalScore = 0;
+
+        while (true) {
+            String difficulty = getDifficulty(scanner);
+
+            if (difficulty.equalsIgnoreCase("quit")) {
+                break;
+            }
+
+            String word1 = getRandomWord(difficulty);
+            String word2 = shuffleWord(word1);
+
+            System.out.println("Solve the anagram: " + word2);
+
+            long startTime = System.currentTimeMillis();
+
+            String userAnswer = scanner.nextLine();
+
+            long endTime = System.currentTimeMillis();
+            long elapsedTime = endTime - startTime;
+            int roundScore = calculateScore(elapsedTime, difficulty);
+
+            if (userAnswer.equalsIgnoreCase(word1)) {
+                System.out.println("Congratulations! You solved the anagram.");
+                System.out.println("Round score: " + roundScore);
+                totalScore += roundScore;
+            } else {
+                System.out.println("Sorry, the correct answer was: " + word1);
+                System.out.println("Round score: 0");
+            }
+
+            System.out.println("Total score: " + totalScore);
+
+            if (highScoreManager.isHighScore(difficulty, roundScore)) {
+                System.out.println("New high score for " + difficulty + ": " + roundScore);
+                highScoreManager.updateHighScore(difficulty, roundScore);
+                highScoreManager.saveHighScores();
+            } else {
+                System.out.println("High score for " + difficulty + ": " + highScoreManager.getHighScore(difficulty));
+            }
+
+            System.out.print("Type 'quit' to exit or press Enter to continue: ");
+            String input = scanner.nextLine();
+            if (input.equalsIgnoreCase("quit")) {
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void checkAnagrams() {
+        System.out.print("Enter the first word: ");
+        String word1 = scanner.nextLine();
+
+        System.out.print("Enter the second word: ");
+        String word2 = scanner.nextLine();
+
+        boolean areAnagrams = checkAnagrams(word1, word2);
+
+        if (areAnagrams) {
+            System.out.println(word1 + " and " + word2 + " are anagrams!");
+        } else {
+            System.out.println(word1 + " and " + word2 + " are not anagrams.");
+        }
+    }
+
+    private String getDifficulty(Scanner scanner) {
         System.out.println("Choose difficulty level (easy, medium, hard) or type 'quit' to exit:");
         return scanner.nextLine().toLowerCase();
     }
 
-    @Override
-    public String getRandomWord(String difficulty) {
+    private String getRandomWord(String difficulty) {
         // Implement your word list retrieval based on the selected difficulty
         // For simplicity, we'll use predefined lists here
         String[] easyWords = {"apple", "cat", "dog", "sun", "tree"};
@@ -45,8 +116,7 @@ public class AnagramGameUseCase implements AnagramGameInputBoundary {
         return selectedWords[randomIndex];
     }
 
-    @Override
-    public String shuffleWord(String word) {
+    private String shuffleWord(String word) {
         char[] characters = word.toCharArray();
         Random random = new Random();
 
@@ -60,8 +130,7 @@ public class AnagramGameUseCase implements AnagramGameInputBoundary {
         return new String(characters);
     }
 
-    @Override
-    public int calculateScore(long elapsedTime, String difficulty) {
+    private int calculateScore(long elapsedTime, String difficulty) {
         ScoringStrategy scoringStrategy;
         switch (difficulty) {
             case "medium":
@@ -77,9 +146,7 @@ public class AnagramGameUseCase implements AnagramGameInputBoundary {
         return scoringStrategy.calculateScore(elapsedTime);
     }
 
-    @Override
-    public boolean checkAnagrams(String word1, String word2) {
+    private boolean checkAnagrams(String word1, String word2) {
         return anagramChecker.areAnagrams(word1, word2);
     }
-
 }
