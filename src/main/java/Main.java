@@ -13,13 +13,18 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        // create all necessary classes
         Scanner scanner = new Scanner(System.in);
         HighScoreGatewayBoundary highScoreGateway = new FileHighScoreGateway("high_scores.txt");
         HighScoreManagerInputBoundary highScoreManager = new HighScoreManagerUseCase(highScoreGateway);
         AnagramGameInputBoundary gameUseCase = new AnagramGameUseCase(new AnagramChecker(), scanner, highScoreManager);
         GameController gameController = new GameController(gameUseCase);
         StartGameMenu startGame = new StartGameMenu(gameController);
-        startGame.playAnagramGame();
+
+        // begin game
+        startGame.executeUserInput();
+
+        // end game
         scanner.close();
     }
 }
