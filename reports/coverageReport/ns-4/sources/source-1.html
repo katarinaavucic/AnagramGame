@@ -1,0 +1,166 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > HighScoreManagerUseCase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">use_cases.saving</a>
+</div>
+
+<h1>Coverage Summary for Class: HighScoreManagerUseCase (use_cases.saving)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HighScoreManagerUseCase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package use_cases.saving;
+&nbsp;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * A class used to manage all functionalities related to calculating and saving high scores. It contains a local copy of
+&nbsp; * the highScores that is generated before the game, and a FileHighScoreGateway storage object that it calls to save the
+&nbsp; * highScores.
+&nbsp; */
+&nbsp;public class HighScoreManagerUseCase implements HighScoreManagerInputBoundary{
+&nbsp;    private final Map&lt;String, Integer&gt; highScores;
+&nbsp;    private final HighScoreGatewayBoundary storage;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new HighScoreManagerUseCase with the given data.
+&nbsp;     * @param storage a FileHighScoreGateway object that saves the high score data
+&nbsp;     */
+<b class="fc">&nbsp;    public HighScoreManagerUseCase(HighScoreGatewayBoundary storage) {</b>
+<b class="fc">&nbsp;        this.storage = storage;</b>
+<b class="fc">&nbsp;        this.highScores = storage.loadHighScores();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks if a score is a high score for the specified difficulty.
+&nbsp;     * @param difficulty a String containing the difficulty level
+&nbsp;     * @param score an int representing the score the user got on this round
+&nbsp;     * @return a boolean indicating True if score is a high score and False if not.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean isHighScore(String difficulty, int score) {
+<b class="fc">&nbsp;        return highScores.containsKey(difficulty) &amp;&amp; score &gt; highScores.get(difficulty);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Updates the local highScores dictionary in this session.
+&nbsp;     * @param difficulty a String containing the difficulty level
+&nbsp;     * @param score an int representing the score the user got on this round
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void updateHighScore(String difficulty, int score) {
+<b class="fc">&nbsp;        if (!highScores.containsKey(difficulty) || score &gt; highScores.get(difficulty)) {</b>
+<b class="fc">&nbsp;            highScores.put(difficulty, score);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the high score for a specific difficulty level in the local highScores dictionary.
+&nbsp;     * @param difficulty a String containing the difficulty level
+&nbsp;     * @return an int containing the high score
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int getHighScore(String difficulty) {
+<b class="fc">&nbsp;        return highScores.getOrDefault(difficulty, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calls the saveHighScores method in the storage to save the highScores.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void saveHighScores() {
+<b class="nc">&nbsp;        storage.saveHighScores(highScores);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-08-07 22:19</div>
+</div>
+</body>
+</html>
