@@ -33,7 +33,7 @@ check if two words are anagrams.
 
 ## Project Specifications
 
-This program was created using JDK11 and JUnit 4 testing.
+This program was created using JDK11 and JUnit 4 testing and is 977 lines of code (including Javadocs and testing).
 
 ### Use Cases
 
