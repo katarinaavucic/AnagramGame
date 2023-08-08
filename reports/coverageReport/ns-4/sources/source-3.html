@@ -1,0 +1,100 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > HighScoreManagerInputBoundary</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">use_cases.saving</a>
+</div>
+
+<h1>Coverage Summary for Class: HighScoreManagerInputBoundary (use_cases.saving)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">HighScoreManagerInputBoundary</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package use_cases.saving;
+&nbsp;
+&nbsp;/**
+&nbsp; * An interface that the HighScoreManagerUseCase implements to maintain the Dependency Inversion Principle.
+&nbsp; */
+&nbsp;public interface HighScoreManagerInputBoundary {
+&nbsp;    /**
+&nbsp;     * Checks if a score is a high score for the specified difficulty.
+&nbsp;     * @param difficulty a String containing the difficulty level
+&nbsp;     * @param score an int representing the score the user got on this round
+&nbsp;     * @return a boolean indicating True if score is a high score and False if not.
+&nbsp;     */
+&nbsp;    boolean isHighScore(String difficulty, int score);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Updates the local highScores dictionary in this session.
+&nbsp;     * @param difficulty a String containing the difficulty level
+&nbsp;     * @param score an int representing the score the user got on this round
+&nbsp;     */
+&nbsp;    void updateHighScore(String difficulty, int score);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the high score for a specific difficulty level in the local highScores dictionary.
+&nbsp;     * @param difficulty a String containing the difficulty level
+&nbsp;     * @return an int containing the high score
+&nbsp;     */
+&nbsp;    int getHighScore(String difficulty);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calls the saveHighScores method in the storage to save the highScores.
+&nbsp;     */
+&nbsp;    void saveHighScores();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-08-07 22:19</div>
+</div>
+</body>
+</html>

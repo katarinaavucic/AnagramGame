@@ -1,0 +1,296 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > AnagramGameUseCase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">use_cases.gameplay</a>
+</div>
+
+<h1>Coverage Summary for Class: AnagramGameUseCase (use_cases.gameplay)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AnagramGameUseCase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    57.1%
+  </span>
+  <span class="absValue">
+    (4/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    28.2%
+  </span>
+  <span class="absValue">
+    (20/71)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package use_cases.gameplay;
+&nbsp;
+&nbsp;import entities.AnagramChecker;
+&nbsp;import use_cases.saving.HighScoreManagerInputBoundary;
+&nbsp;import use_cases.scoring.EasyScoringStrategy;
+&nbsp;import use_cases.scoring.HardScoringStrategy;
+&nbsp;import use_cases.scoring.MediumScoringStrategy;
+&nbsp;import use_cases.scoring.ScoringStrategy;
+&nbsp;
+&nbsp;import java.util.Random;
+&nbsp;import java.util.Scanner;
+&nbsp;
+&nbsp;/**
+&nbsp; * A class that executes both anagram games. It implements AnagramGameInputBoundary, and contains an anagramChecker to
+&nbsp; * check for anagrams, a scanner to read the user input, and a highScoreManager to delegate high score functionalities.
+&nbsp; */
+&nbsp;public class AnagramGameUseCase implements AnagramGameInputBoundary {
+&nbsp;    private final AnagramChecker anagramChecker;
+&nbsp;    private final Scanner scanner;
+&nbsp;    private final HighScoreManagerInputBoundary highScoreManager;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new instance of AnagramGameUseCase with the given inputs.
+&nbsp;     * @param anagramChecker an AnagramChecker for checking anagrams
+&nbsp;     * @param scanner a Scanner for reading user input
+&nbsp;     * @param highScoreManager a HighScoreManagerUseCase for delegating high score functionalities
+&nbsp;     */
+<b class="fc">&nbsp;    public AnagramGameUseCase(AnagramChecker anagramChecker, Scanner scanner, HighScoreManagerInputBoundary highScoreManager) {</b>
+<b class="fc">&nbsp;        this.anagramChecker = anagramChecker;</b>
+<b class="fc">&nbsp;        this.scanner = scanner;</b>
+<b class="fc">&nbsp;        this.highScoreManager = highScoreManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new round of the anagram game.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void playAnagramGame() {
+<b class="nc">&nbsp;        System.out.println(&quot;Anagram Game:&quot;);</b>
+<b class="nc">&nbsp;        int totalScore = 0;</b>
+&nbsp;
+&nbsp;        // loops until user types &quot;quit&quot;
+&nbsp;        while (true) {
+<b class="nc">&nbsp;            System.out.println(&quot;Choose difficulty level (easy, medium, hard) or type &#39;quit&#39; to exit:&quot;);</b>
+<b class="nc">&nbsp;            String difficulty = scanner.nextLine().toLowerCase();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (difficulty.equalsIgnoreCase(&quot;quit&quot;)) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String word = getRandomWord(difficulty);</b>
+<b class="nc">&nbsp;            String shuffledWord = shuffleWord(word);</b>
+&nbsp;
+<b class="nc">&nbsp;            System.out.println(&quot;Solve the anagram: &quot; + shuffledWord);</b>
+&nbsp;
+&nbsp;            // counts time it takes for user to answer and calculates score
+<b class="nc">&nbsp;            long startTime = System.currentTimeMillis();</b>
+<b class="nc">&nbsp;            String userAnswer = scanner.nextLine();</b>
+<b class="nc">&nbsp;            long endTime = System.currentTimeMillis();</b>
+<b class="nc">&nbsp;            long elapsedTime = endTime - startTime;</b>
+<b class="nc">&nbsp;            int roundScore = calculateScore(elapsedTime, difficulty);</b>
+&nbsp;
+&nbsp;            // calculates score for this round
+<b class="nc">&nbsp;            if (userAnswer.equalsIgnoreCase(word)) {</b>
+<b class="nc">&nbsp;                System.out.println(&quot;Congratulations! You solved the anagram.&quot;);</b>
+<b class="nc">&nbsp;                System.out.println(&quot;Round score: &quot; + roundScore);</b>
+<b class="nc">&nbsp;                totalScore += roundScore;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                System.out.println(&quot;Sorry, the correct answer was: &quot; + word);</b>
+<b class="nc">&nbsp;                System.out.println(&quot;Round score: 0&quot;);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            // calculates total score for this session
+<b class="nc">&nbsp;            System.out.println(&quot;Total score: &quot; + totalScore);</b>
+&nbsp;
+&nbsp;            // checks if score is a high score and retrieves high score
+<b class="nc">&nbsp;            if (highScoreManager.isHighScore(difficulty, roundScore)) {</b>
+<b class="nc">&nbsp;                System.out.println(&quot;New high score for &quot; + difficulty + &quot;: &quot; + roundScore);</b>
+<b class="nc">&nbsp;                highScoreManager.updateHighScore(difficulty, roundScore);</b>
+<b class="nc">&nbsp;                highScoreManager.saveHighScores();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                System.out.println(&quot;High score for &quot; + difficulty + &quot;: &quot; + highScoreManager.getHighScore(difficulty));</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            System.out.print(&quot;Type &#39;quit&#39; to exit or press Enter to continue: &quot;);</b>
+<b class="nc">&nbsp;            String input = scanner.nextLine();</b>
+<b class="nc">&nbsp;            if (input.equalsIgnoreCase(&quot;quit&quot;)) {</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new round of the anagram checker.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void checkAnagrams() {
+<b class="nc">&nbsp;        System.out.print(&quot;Enter the first word: &quot;);</b>
+<b class="nc">&nbsp;        String word1 = scanner.nextLine();</b>
+<b class="nc">&nbsp;        System.out.print(&quot;Enter the second word: &quot;);</b>
+<b class="nc">&nbsp;        String word2 = scanner.nextLine();</b>
+&nbsp;
+&nbsp;        // finds if two words are anagrams
+<b class="nc">&nbsp;        boolean areAnagrams = checkAnagrams(word1, word2);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (areAnagrams) {</b>
+<b class="nc">&nbsp;            System.out.println(word1 + &quot; and &quot; + word2 + &quot; are anagrams!&quot;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            System.out.println(word1 + &quot; and &quot; + word2 + &quot; are not anagrams.&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets a random word from a set of generates words.
+&nbsp;     * @param difficulty a String representing the difficulty level
+&nbsp;     * @return a String representing the random word
+&nbsp;     */
+&nbsp;    protected String getRandomWord(String difficulty) {
+&nbsp;        // for simplicity, we&#39;ll use predefined lists here
+<b class="nc">&nbsp;        String[] easyWords = {&quot;apple&quot;, &quot;cat&quot;, &quot;dog&quot;, &quot;sun&quot;, &quot;tree&quot;};</b>
+<b class="nc">&nbsp;        String[] mediumWords = {&quot;banana&quot;, &quot;elephant&quot;, &quot;guitar&quot;, &quot;mountain&quot;, &quot;keyboard&quot;};</b>
+<b class="nc">&nbsp;        String[] hardWords = {&quot;independence&quot;, &quot;chocolate&quot;, &quot;juxtaposition&quot;, &quot;university&quot;, &quot;sophisticated&quot;};</b>
+&nbsp;
+&nbsp;        String[] selectedWords;
+&nbsp;
+<b class="nc">&nbsp;        switch (difficulty) {</b>
+&nbsp;            case &quot;medium&quot;:
+<b class="nc">&nbsp;                selectedWords = mediumWords;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;hard&quot;:
+<b class="nc">&nbsp;                selectedWords = hardWords;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            default: // default is easy (so not a case)
+<b class="nc">&nbsp;                selectedWords = easyWords;</b>
+&nbsp;                break;
+&nbsp;        }
+&nbsp;        // selects a random word
+<b class="nc">&nbsp;        Random random = new Random();</b>
+<b class="nc">&nbsp;        int randomIndex = random.nextInt(selectedWords.length);</b>
+<b class="nc">&nbsp;        return selectedWords[randomIndex];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Shuffles the word.
+&nbsp;     * @param word a String representing the random word
+&nbsp;     * @return a String representing the shuffled word
+&nbsp;     */
+&nbsp;    protected String shuffleWord(String word) {
+<b class="fc">&nbsp;        char[] characters = word.toCharArray();</b>
+<b class="fc">&nbsp;        Random random = new Random();</b>
+&nbsp;
+&nbsp;        // shuffles the word
+<b class="fc">&nbsp;        for (int i = 0; i &lt; characters.length; i++) {</b>
+<b class="fc">&nbsp;            int randomIndex = random.nextInt(characters.length);</b>
+<b class="fc">&nbsp;            char temp = characters[i];</b>
+<b class="fc">&nbsp;            characters[i] = characters[randomIndex];</b>
+<b class="fc">&nbsp;            characters[randomIndex] = temp;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new String(characters);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates the score by calling on the correct ScoringStrategy class according to difficulty.
+&nbsp;     * @param elapsedTime a long representing how long it took
+&nbsp;     * @param difficulty a String representing the difficulty level
+&nbsp;     * @return an int representing the score
+&nbsp;     */
+&nbsp;    protected int calculateScore(long elapsedTime, String difficulty) {
+&nbsp;        ScoringStrategy scoringStrategy;
+<b class="fc">&nbsp;        switch (difficulty) {</b>
+&nbsp;            case &quot;medium&quot;:
+<b class="fc">&nbsp;                scoringStrategy = new MediumScoringStrategy();</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case &quot;hard&quot;:
+<b class="fc">&nbsp;                scoringStrategy = new HardScoringStrategy();</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            default: // default is easy
+<b class="fc">&nbsp;                scoringStrategy = new EasyScoringStrategy();</b>
+&nbsp;                break;
+&nbsp;        }
+<b class="fc">&nbsp;        return scoringStrategy.calculateScore(elapsedTime);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks if two words are anagrams by calling the anagramChecker&#39;s areAnagrams method.
+&nbsp;     * @param word1 the first word
+&nbsp;     * @param word2 the second word
+&nbsp;     * @return a boolean that is true if they are anagrams and false if not
+&nbsp;     */
+&nbsp;    protected boolean checkAnagrams(String word1, String word2) {
+<b class="fc">&nbsp;        return anagramChecker.areAnagrams(word1, word2);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-08-07 22:19</div>
+</div>
+</body>
+</html>

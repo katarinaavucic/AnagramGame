@@ -1,0 +1,8 @@
+unnamed package
+entities
+interface_adapters
+interface_adapters.commands
+use_cases.gameplay
+use_cases.saving
+use_cases.scoring
+views

@@ -1,0 +1,127 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > MediumScoringStrategy</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">use_cases.scoring</a>
+</div>
+
+<h1>Coverage Summary for Class: MediumScoringStrategy (use_cases.scoring)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MediumScoringStrategy</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package use_cases.scoring;
+&nbsp;
+&nbsp;/**
+&nbsp; * A class that implements ScoringStrategy and generates the score when the difficulty is set to medium.
+&nbsp; */
+&nbsp;public class MediumScoringStrategy implements ScoringStrategy{
+&nbsp;    private static int MEDIUM_SCORE_DIVIDEND;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new instance of MediumScoringStrategy.
+&nbsp;     */
+<b class="fc">&nbsp;    public MediumScoringStrategy(){</b>
+<b class="fc">&nbsp;        MEDIUM_SCORE_DIVIDEND = 150000;</b>
+&nbsp;    }
+&nbsp;    /**
+&nbsp;     * Calculates the score given the time it took to solve the anagram.
+&nbsp;     * @param elapsedTime a long representing how long it took
+&nbsp;     * @return an int representing the score
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public int calculateScore(long elapsedTime) {
+<b class="fc">&nbsp;        return (int) (MEDIUM_SCORE_DIVIDEND / elapsedTime);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-08-07 22:19</div>
+</div>
+</body>
+</html>

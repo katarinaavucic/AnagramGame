@@ -1,0 +1,167 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > FileHighScoreGateway</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">interface_adapters</a>
+</div>
+
+<h1>Coverage Summary for Class: FileHighScoreGateway (interface_adapters)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FileHighScoreGateway</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    37.5%
+  </span>
+  <span class="absValue">
+    (9/24)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package interface_adapters;
+&nbsp;
+&nbsp;import use_cases.saving.HighScoreGatewayBoundary;
+&nbsp;import java.io.*;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * A class that executes the loading a saving functionalities for highScores. It contains a string filename
+&nbsp; * representing the file to save and load highScores.
+&nbsp; */
+&nbsp;public class FileHighScoreGateway implements HighScoreGatewayBoundary {
+&nbsp;    private final String fileName;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new instance of FileHighScoreGateway with specified data.
+&nbsp;     * @param fileName a String containing the name of the file that will be used.
+&nbsp;     */
+<b class="fc">&nbsp;    public FileHighScoreGateway(String fileName) {</b>
+<b class="fc">&nbsp;        this.fileName = fileName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Loads the highScores from file.
+&nbsp;     * @return a Map containing the highScores
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Map&lt;String, Integer&gt; loadHighScores() {
+<b class="fc">&nbsp;        Map&lt;String, Integer&gt; loadedHighScores = new HashMap&lt;&gt;();</b>
+&nbsp;        // tries to read file specified by filename
+<b class="fc">&nbsp;        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {</b>
+&nbsp;            String line;
+<b class="nc">&nbsp;            while ((line = reader.readLine()) != null) {</b>
+<b class="nc">&nbsp;                String[] parts = line.split(&quot;,&quot;);</b>
+<b class="nc">&nbsp;                if (parts.length == 2) {</b>
+<b class="nc">&nbsp;                    String difficulty = parts[0];</b>
+<b class="nc">&nbsp;                    int score = Integer.parseInt(parts[1]);</b>
+<b class="nc">&nbsp;                    loadedHighScores.put(difficulty, score);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;        // if it fails, sets all highScores to 0
+<b class="fc">&nbsp;        } catch (IOException e) {</b>
+<b class="fc">&nbsp;            loadedHighScores.put(&quot;easy&quot;, 0);</b>
+<b class="fc">&nbsp;            loadedHighScores.put(&quot;medium&quot;, 0);</b>
+<b class="fc">&nbsp;            loadedHighScores.put(&quot;hard&quot;, 0);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return loadedHighScores;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Saves the local highScores to a .txt file.
+&nbsp;     * @param highScores a Map containing the local highScores
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void saveHighScores(Map&lt;String, Integer&gt; highScores) {
+<b class="nc">&nbsp;        try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {</b>
+<b class="nc">&nbsp;            for (Map.Entry&lt;String, Integer&gt; entry : highScores.entrySet()) {</b>
+<b class="nc">&nbsp;                writer.println(entry.getKey() + &quot;,&quot; + entry.getValue());</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-08-07 22:19</div>
+</div>
+</body>
+</html>

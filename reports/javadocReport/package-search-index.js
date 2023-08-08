@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"entities"},{"l":"interface_adapters"},{"l":"interface_adapters.commands"},{"l":"use_cases.gameplay"},{"l":"use_cases.saving"},{"l":"use_cases.scoring"},{"l":"views"}]
