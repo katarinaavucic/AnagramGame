@@ -41,7 +41,8 @@ public class AnagramGameUseCase implements AnagramGameInputBoundary {
 
         // loops until user types "quit"
         while (true) {
-            String difficulty = getDifficulty(scanner);
+            System.out.println("Choose difficulty level (easy, medium, hard) or type 'quit' to exit:");
+            String difficulty = scanner.nextLine().toLowerCase();
 
             if (difficulty.equalsIgnoreCase("quit")) {
                 break;
@@ -110,21 +111,11 @@ public class AnagramGameUseCase implements AnagramGameInputBoundary {
     }
 
     /**
-     * Gets the difficulty level based on user input
-     * @param scanner a Scanner to see user input
-     * @return a String representing the difficulty level
-     */
-    private String getDifficulty(Scanner scanner) {
-        System.out.println("Choose difficulty level (easy, medium, hard) or type 'quit' to exit:");
-        return scanner.nextLine().toLowerCase();
-    }
-
-    /**
      * Gets a random word from a set of generates words.
      * @param difficulty a String representing the difficulty level
      * @return a String representing the random word
      */
-    private String getRandomWord(String difficulty) {
+    protected String getRandomWord(String difficulty) {
         // for simplicity, we'll use predefined lists here
         String[] easyWords = {"apple", "cat", "dog", "sun", "tree"};
         String[] mediumWords = {"banana", "elephant", "guitar", "mountain", "keyboard"};
@@ -154,7 +145,7 @@ public class AnagramGameUseCase implements AnagramGameInputBoundary {
      * @param word a String representing the random word
      * @return a String representing the shuffled word
      */
-    private String shuffleWord(String word) {
+    protected String shuffleWord(String word) {
         char[] characters = word.toCharArray();
         Random random = new Random();
 
@@ -174,7 +165,7 @@ public class AnagramGameUseCase implements AnagramGameInputBoundary {
      * @param difficulty a String representing the difficulty level
      * @return an int representing the score
      */
-    private int calculateScore(long elapsedTime, String difficulty) {
+    protected int calculateScore(long elapsedTime, String difficulty) {
         ScoringStrategy scoringStrategy;
         switch (difficulty) {
             case "medium":
@@ -196,7 +187,7 @@ public class AnagramGameUseCase implements AnagramGameInputBoundary {
      * @param word2 the second word
      * @return a boolean that is true if they are anagrams and false if not
      */
-    private boolean checkAnagrams(String word1, String word2) {
+    protected boolean checkAnagrams(String word1, String word2) {
         return anagramChecker.areAnagrams(word1, word2);
     }
 }
