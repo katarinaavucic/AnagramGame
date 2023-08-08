@@ -90,7 +90,9 @@ implement in Junit4.
 
 ### Clean Architecture Violations
 
-There are no clean architecture violations in this code.
+AnagramGameUseCase takes in a Scanner that reads user input. This is a direct violation of Clean Architecture since the Application
+Business Rules layer directly interacts with the Framework and Adapters layer. However, ChatGPT did not catch this error or provide 
+feedback for it.
 
 ## Author
 
