@@ -6,9 +6,15 @@ check if two words are anagrams.
 ## Table of Contents
 
 - [Features](#features)
-- [Getting Started](#getting-started)
 - [Usage](#usage)
 - [Dependencies](#dependencies)
+- [Project Specifications](#project-specifications)
+  - [Use Cases](#use-cases)
+  - [User Stories](#user-stories)
+  - [Design Principles](#design-patterns)
+  - [Code Smells](#code-smells)
+  - [Solid Principles](#solid-principles)
+  - [Clean Architecture Violations](#clean-architecture-violations)
 - [Author](#author)
 
 ## Features
@@ -17,12 +23,6 @@ check if two words are anagrams.
 - Choose from different difficulty levels.
 - Keep track of high scores for each difficulty level.
 - Check if two words are anagrams.
-
-## Getting Started
-
-1. Clone the repository: https://github.com/katarinaavucic/AnagramGame.git
-2. Compile the program: 'javac AnagramGame/src/main/java/Main.java'
-3. Run the program: 'java AnagramGame.src.main.java.Main'
 
 ## Usage
 
