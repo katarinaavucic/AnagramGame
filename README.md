@@ -33,7 +33,8 @@ check if two words are anagrams.
 
 ## Project Specifications
 
-This program was created using JDK11 and JUnit 4 testing and is 977 lines of code (including Javadocs and testing).
+This program was created using JDK11 and JUnit 4 testing and is 977 lines of code (including Javadocs, testing, and adequate white space
+for readability).
 
 ### Use Cases
 
@@ -59,9 +60,13 @@ This program was created using JDK11 and JUnit 4 testing and is 977 lines of cod
    commands are.
 
 ### Code Smells
-- Long Method in AnagramUseCase: the playAnagramGame() method is quite lengthy, however, most of the code is printing
+- Long Method in AnagramGameUseCase: the playAnagramGame() method is quite lengthy, however, most of the code is printing
   lines to the user and calls to protected methods. Thus, I have made sure to well comment what everything does for easy
   readability.
+- Long Class with AnagramGameUseCase: this class started small, but as more methods were added it became very lengthy. In order to reduce
+  the size of this class, I would create a separate class called AnagramCheckerUseCase and have both classes be subclasses of AnagramGame.
+  That way, both could inherit the necessary methods needed to execute the game (like checkAnagrams), but be smaller classes. However, I did
+  not have enough lines of code to do this, so I left the implementation as is.
 - Primitive Obsession with difficulty levels: using Strings for the difficulty levels ("easy", "medium", "hard") could
   cause errors. If this were a bigger project, I would have created a class for them, but with such a small program it is
   not as necessary.
