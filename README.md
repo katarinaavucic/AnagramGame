@@ -69,7 +69,7 @@ lines to the user and calls to protected methods. Thus, I have made sure to well
 readability.
 - Primitive Obsession with difficulty levels: using Strings for the difficulty levels ("easy", "medium", "hard") could 
 cause errors. If this were a bigger project, I would have created a class for them, but with such a small program it is 
-not as necessary.
+not as necessary. 
 
 ### SOLID Principles
 
