@@ -7,7 +7,6 @@ check if two words are anagrams.
 
 - [Features](#features)
 - [Usage](#usage)
-- [Dependencies](#dependencies)
 - [Project Specifications](#project-specifications)
   - [Use Cases](#use-cases)
   - [User Stories](#user-stories)
@@ -31,10 +30,6 @@ check if two words are anagrams.
 - View high scores for each difficulty level.
 - Input two words to check if they are anagrams.
 - Type "quit" to exit the game.
-
-## Dependencies
-
-The Anagram Game program requires Java to be installed on your system.
 
 ## Project Specifications
 
