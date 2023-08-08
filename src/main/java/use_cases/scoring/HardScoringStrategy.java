@@ -5,6 +5,15 @@ package use_cases.scoring;
  */
 public class HardScoringStrategy implements ScoringStrategy{
 
+    private static int HARD_SCORE_DIVIDEND;
+
+    /**
+     * Creates a new instance of EasyScoringStrategy.
+     */
+    public HardScoringStrategy(){
+        HARD_SCORE_DIVIDEND = 200000;
+    }
+
     /**
      * Calculates the score given the time it took to solve the anagram.
      * @param elapsedTime a long representing how long it took
@@ -12,6 +21,6 @@ public class HardScoringStrategy implements ScoringStrategy{
      */
     @Override
     public int calculateScore(long elapsedTime) {
-        return (int) (200000 / elapsedTime);
+        return (int) (HARD_SCORE_DIVIDEND / elapsedTime);
     }
 }
