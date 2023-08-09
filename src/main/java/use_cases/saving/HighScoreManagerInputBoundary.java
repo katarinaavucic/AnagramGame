@@ -1,5 +1,4 @@
 package use_cases.saving;
-
 /**
  * An interface that the HighScoreManagerUseCase implements to maintain the Dependency Inversion Principle.
  */

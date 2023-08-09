@@ -1,12 +1,10 @@
 package entities;
-
 import java.util.Arrays;
 
 /**
  * A class used to check if two words are anagrams.
  */
 public class AnagramChecker {
-
     /**
      * Checks if two words are anagrams.
      * @param word1 the first word

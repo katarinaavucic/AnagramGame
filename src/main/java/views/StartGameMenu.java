@@ -1,5 +1,4 @@
 package views;
-
 import interface_adapters.GameController;
 import interface_adapters.commands.AnswerCommand;
 import interface_adapters.commands.GameCommand;
@@ -26,7 +25,6 @@ public class StartGameMenu {
      */
     public void executeUserInput() {
         System.out.println("Welcome to the Anagram Game!");
-
         while (true) {
             System.out.println("Select an option:\n1. Play an anagram game\n2. Check if words are anagrams\n3. Quit");
             Scanner scanner = new Scanner(System.in);

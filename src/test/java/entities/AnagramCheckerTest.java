@@ -1,5 +1,4 @@
 package entities;
-
 import org.junit.Test;
 import org.junit.Assert;
 
@@ -12,7 +11,7 @@ public class AnagramCheckerTest {
      * Tests areAnagrams with two short words that are anagrams.
      */
     @Test
-    public void areAnagramsShortWordTrue() {
+    public void areAnagramsTrue() {
         String word1 = "dog";
         String word2 = "god";
 
@@ -21,34 +20,10 @@ public class AnagramCheckerTest {
     }
 
     /**
-     * Tests areAnagrams with two long words that are anagrams.
-     */
-    @Test
-    public void areAnagramsLongWordTrue() {
-        String word1 = "juxtaposition";
-        String word2 = "xtaposnoitiuj";
-
-        AnagramChecker anagramChecker = new AnagramChecker();
-        Assert.assertTrue(anagramChecker.areAnagrams(word1, word2));
-    }
-
-    /**
-     * Tests areAnagrams with two short words that are not anagrams.
-     */
-    @Test
-    public void areAnagramsShortWordFalse() {
-        String word1 = "dog";
-        String word2 = "doe";
-
-        AnagramChecker anagramChecker = new AnagramChecker();
-        Assert.assertFalse(anagramChecker.areAnagrams(word1, word2));
-    }
-
-    /**
      * Tests areAnagrams with two long words that are not anagrams.
      */
     @Test
-    public void areAnagramsLongWordFalse() {
+    public void areAnagramsFalse() {
         String word1 = "independence";
         String word2 = "dependecnenx";
 

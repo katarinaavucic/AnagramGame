@@ -1,5 +1,4 @@
 package interface_adapters;
-
 import use_cases.saving.HighScoreGatewayBoundary;
 import java.io.*;
 import java.util.HashMap;
@@ -21,8 +20,7 @@ public class FileHighScoreGateway implements HighScoreGatewayBoundary {
     }
 
     /**
-     * Loads the highScores from file.
-     * @return a Map containing the highScores
+     * {@inheritDoc}
      */
     @Override
     public Map<String, Integer> loadHighScores() {
@@ -48,8 +46,7 @@ public class FileHighScoreGateway implements HighScoreGatewayBoundary {
     }
 
     /**
-     * Saves the local highScores to a .txt file.
-     * @param highScores a Map containing the local highScores
+     * {@inheritDoc}
      */
     @Override
     public void saveHighScores(Map<String, Integer> highScores) {
