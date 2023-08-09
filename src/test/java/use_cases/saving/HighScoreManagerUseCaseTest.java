@@ -1,5 +1,4 @@
 package use_cases.saving;
-
 import interface_adapters.FileHighScoreGateway;
 import org.junit.Assert;
 import org.junit.BeforeClass;

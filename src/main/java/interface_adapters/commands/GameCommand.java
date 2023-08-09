@@ -5,9 +5,8 @@ package interface_adapters.commands;
  * commands from StartGameMenu to GameController or System, with no concern for what the details of these commands.
  */
 public interface GameCommand {
-
     /**
-     * Calls another class' method to pass the command along.
+     * Calls the gameController's executeCommand method to pass the command along.
      */
     void execute();
 }

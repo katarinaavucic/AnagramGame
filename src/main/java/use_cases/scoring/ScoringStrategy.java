@@ -5,7 +5,6 @@ package use_cases.scoring;
  * classes differ only in their algorithm, and thus can be swapped.
  */
 public interface ScoringStrategy {
-
     /**
      * Calculates the score given the time it took to solve the anagram.
      * @param elapsedTime a long representing how long it took

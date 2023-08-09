@@ -1,5 +1,4 @@
 package interface_adapters.commands;
-
 import interface_adapters.GameController;
 
 /**
@@ -20,7 +19,7 @@ public class AnswerCommand implements GameCommand {
     }
 
     /**
-     * Calls the gameController's executeCommand method to pass the command along.
+     * {@inheritDoc}
      */
     @Override
     public void execute() {

@@ -1,5 +1,4 @@
 package use_cases.saving;
-
 import java.util.Map;
 
 /**
@@ -21,10 +20,7 @@ public class HighScoreManagerUseCase implements HighScoreManagerInputBoundary{
     }
 
     /**
-     * Checks if a score is a high score for the specified difficulty.
-     * @param difficulty a String containing the difficulty level
-     * @param score an int representing the score the user got on this round
-     * @return a boolean indicating True if score is a high score and False if not.
+     * {@inheritDoc}
      */
     @Override
     public boolean isHighScore(String difficulty, int score) {
@@ -32,9 +28,7 @@ public class HighScoreManagerUseCase implements HighScoreManagerInputBoundary{
     }
 
     /**
-     * Updates the local highScores dictionary in this session.
-     * @param difficulty a String containing the difficulty level
-     * @param score an int representing the score the user got on this round
+     * {@inheritDoc}
      */
     @Override
     public void updateHighScore(String difficulty, int score) {
@@ -44,9 +38,7 @@ public class HighScoreManagerUseCase implements HighScoreManagerInputBoundary{
     }
 
     /**
-     * Gets the high score for a specific difficulty level in the local highScores dictionary.
-     * @param difficulty a String containing the difficulty level
-     * @return an int containing the high score
+     * {@inheritDoc}
      */
     @Override
     public int getHighScore(String difficulty) {
@@ -54,7 +46,7 @@ public class HighScoreManagerUseCase implements HighScoreManagerInputBoundary{
     }
 
     /**
-     * Calls the saveHighScores method in the storage to save the highScores.
+     * {@inheritDoc}
      */
     @Override
     public void saveHighScores() {

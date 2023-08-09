@@ -12,10 +12,9 @@ public class MediumScoringStrategy implements ScoringStrategy{
     public MediumScoringStrategy(){
         MEDIUM_SCORE_DIVIDEND = 150000;
     }
+
     /**
-     * Calculates the score given the time it took to solve the anagram.
-     * @param elapsedTime a long representing how long it took
-     * @return an int representing the score
+     * {@inheritDoc}
      */
     @Override
     public int calculateScore(long elapsedTime) {

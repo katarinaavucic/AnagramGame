@@ -1,14 +1,8 @@
 package use_cases.gameplay;
-
 import entities.AnagramChecker;
-import interface_adapters.FileHighScoreGateway;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import use_cases.saving.HighScoreGatewayBoundary;
-import use_cases.saving.HighScoreManagerInputBoundary;
-import use_cases.saving.HighScoreManagerUseCase;
-import java.util.Scanner;
 
 /**
  * A test class for AnagramGameUseCase.
@@ -23,11 +17,7 @@ public class AnagramGameUseCaseTest {
      */
     @BeforeClass
     public static void setUp(){
-        Scanner scanner = new Scanner(System.in);
-        HighScoreGatewayBoundary highScoreGateway = new FileHighScoreGateway("high_scores.txt");
-        HighScoreManagerInputBoundary highScoreManager = new HighScoreManagerUseCase(highScoreGateway);
-        anagramGameUseCase = new AnagramGameUseCase(new AnagramChecker(), scanner,
-                highScoreManager);
+        anagramGameUseCase = new AnagramGameUseCase(new AnagramChecker());
     }
 
     /**

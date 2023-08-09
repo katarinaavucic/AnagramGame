@@ -7,23 +7,19 @@ import use_cases.saving.HighScoreManagerInputBoundary;
 import use_cases.saving.HighScoreManagerUseCase;
 import views.StartGameMenu;
 import entities.AnagramChecker;
-
 import java.util.Scanner;
 
 public class Main {
-
     public static void main(String[] args) {
         // create all necessary classes
         Scanner scanner = new Scanner(System.in);
         HighScoreGatewayBoundary highScoreGateway = new FileHighScoreGateway("high_scores.txt");
         HighScoreManagerInputBoundary highScoreManager = new HighScoreManagerUseCase(highScoreGateway);
-        AnagramGameInputBoundary gameUseCase = new AnagramGameUseCase(new AnagramChecker(), scanner, highScoreManager);
-        GameController gameController = new GameController(gameUseCase);
+        AnagramGameInputBoundary gameUseCase = new AnagramGameUseCase(new AnagramChecker());
+        GameController gameController = new GameController(gameUseCase, highScoreManager, scanner);
         StartGameMenu startGame = new StartGameMenu(gameController);
-
         // begin game
         startGame.executeUserInput();
-
         // end game
         scanner.close();
     }
